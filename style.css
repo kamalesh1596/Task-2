@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent-color: #00f2fe;
+    --glass-bg: rgba(255, 255, 255, 0.9);
+    --text-dark: #2d3436;
+    --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Keyframes for Animations */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }}
+
+@keyframes navDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(-45deg, #4158D0, #C850C0, #FFCC70, #00DBDE);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 10%;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(15px);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    animation: navDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar h1 {
+    font-weight: 700;
+    background: linear-gradient(to right, #fff, var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: 0.3s;
+    position: relative;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+/* Layout Container */
+.container {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+}
+
+/* Animated Card Styling */
+.card {
+    background: var(--glass-bg);
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: fadeInUp 1s ease-out forwards;
+    opacity: 0; /* Starts hidden for animation */
+}
+
+.card:nth-child(1) { animation-delay: 0.2s; }
+.card:nth-child(2) { animation-delay: 0.4s; }
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card h2 {
+    margin-bottom: 2rem;
+    font-weight: 700;
+    color: #4834d4;
+}
+
+/* Form Elements */
+input, textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #f1f2f6;
+    border-radius: 12px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #764ba2;
+    transform: scale(1.01);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+button {
+    padding: 15px 25px;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+button:hover {    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(118, 75, 162, 0.4);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* To-Do List Animations */
+#taskList li {
+    background: white;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    border-left: 6px solid #C850C0;
+    animation: slideInRight 0.5s ease forwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; }
+    .navbar { flex-direction: column; gap: 15px; }}
